@@ -1,36 +1,37 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
 
-Vue.use(VueRouter);
-
+// 1. Define route components.
+// These can be imported from other files
+import App from './components/App.vue';
 import Home from './components/Home.vue';
 import About from './components/About.vue';
 import Contact from './components/Contact.vue';
 
-const router = new VueRouter({
-    mode: 'history',
-    base: __dirname,
-    routes: [
-        { path: '/', component: Home },
-        { path: '/about', component: About },
-        { path: '/contact', component: Contact }
-    ]
-});
+// 2. Define some routes
+// Each route should map to a component.
+// We'll talk about nested routes later.
+const routes = [
+  { path: '/', component: Home },
+  { path: '/about', component: About },
+  { path: '/contact', component: Contact },
+]
 
-new Vue({
-    router,
-    template: `
-    <div>
-      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item"><router-link to="/" class="nav-link">Home</router-link></li>
-            <li class="nav-item"><router-link to="/about" class="nav-link">About</router-link></li>
-            <li class="nav-item"><router-link to="/contact" class="nav-link">Contact</router-link></li>
-          </ul>
-        </div>
-      </nav>
-      <router-view class="view"></router-view>
-    </div>
-  `
-}).$mount('#app');
+// 3. Create the router instance and pass the `routes` option
+// You can pass in additional options here, but let's
+// keep it simple for now.
+const router = createRouter({
+  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  history: createWebHistory("/"),
+  routes, // short for `routes: routes`
+})
+
+// 5. Create and mount the root instance.
+const app = createApp(App)
+// Make sure to _use_ the router instance to make the
+// whole app router-aware.
+app.use(router)
+
+app.mount('#app')
+
+// Now the app has started!
