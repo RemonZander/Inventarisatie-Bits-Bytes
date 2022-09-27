@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
+import '@/assets/css/tailwind.css'
 
 // 1. Define route components.
 // These can be imported from other files
