@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
 import '@/assets/css/tailwind.css'
+//import Alpine from 'alpinejs'
 
 // 1. Define route components.
 // These can be imported from other files
@@ -8,6 +9,11 @@ import App from './components/App.vue';
 import Home from './components/Home.vue';
 import About from './components/About.vue';
 import Contact from './components/Contact.vue';
+
+//window.Alpine = Alpine
+
+//Alpine.start()
+
 
 // 2. Define some routes
 // Each route should map to a component.
