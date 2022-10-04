@@ -1,15 +1,16 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
 import '@/assets/css/tailwind.css'
-import App from './components/App.vue';
 import Home from './components/Home.vue';
-import About from './components/About.vue';
+import AddModel from './components/AddModel.vue';
 import Contact from './components/Contact.vue';
+import Menubar from './components/Menubar.vue';
+import Sidebar from './components/Sidebar.vue';
 
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/about', component: About },
+  { path: '/AddModel', component: AddModel },
   { path: '/contact', component: Contact },
 ]
 
@@ -19,7 +20,10 @@ const router = createRouter({
   routes,
 })
 
-const app = createApp(App)
+const app = createApp(Home)
+
+app.component('Menubar', Menubar);
+app.component('Sidebar', Sidebar);
 
 app.use(router)
 
