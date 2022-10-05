@@ -8,7 +8,7 @@
                 <button @click.prevent="toggle(false)" class="mt-[3rem] hover:scale-125 duration-300">
                     <img src="@/assets/menu-icon.png" alt="menu">
                 </button>
-                <router-link to="/AddModel" class="hover:scale-125 duration-300">
+                <router-link to="/addmodel" class="hover:scale-125 duration-300">
                     <img src="@/assets/plus.png" alt="addModel">
                 </router-link>
                 <!--<button @click.prevent="" class="hover:scale-125 duration-300">
