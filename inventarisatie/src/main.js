@@ -6,10 +6,12 @@ import HomeContent from './components/HomeContent.vue';
 import AddCategory from './components/AddCategory.vue';
 import Menubar from './components/Menubar.vue';
 import Sidebar from './components/Sidebar.vue';
+import LoginScreen from './components/LoginScreen.vue';
 
 const routes = [
   { path: '/', component: HomeContent },
     { path: '/AddCategory', component: AddCategory },
+    {path: '/Login', component: LoginScreen},
 ]
 
 
