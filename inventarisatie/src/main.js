@@ -9,9 +9,8 @@ import Sidebar from './components/Sidebar.vue';
 import LoginScreen from './components/LoginScreen.vue';
 
 const routes = [
-  { path: '/', component: HomeContent },
+  { path: '/', component: LoginScreen },
     { path: '/AddCategory', component: AddCategory },
-    {path: '/Login', component: LoginScreen},
 ]
 
 
