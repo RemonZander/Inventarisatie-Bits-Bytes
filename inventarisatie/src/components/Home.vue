@@ -1,11 +1,10 @@
-<template> 
+<template>
         <!-- Sidebar -->
         <div class="flex">
             <Sidebar />
-
-            <!-- Menubar -->
-            <div class="flex flex-col w-full h-[100vh]" @click.prevent="toggle(true)">
-                <Menubar />
+        <!-- Menubar -->
+        <div class="flex flex-col w-full h-[100vh]" @click.prevent="toggle(true)">
+            <Menubar />
 
                 <!-- Page Content -->
                 <div class="h-full">
