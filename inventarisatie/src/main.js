@@ -8,21 +8,22 @@ import Menubar from './components/Menubar.vue';
 import Sidebar from './components/Sidebar.vue';
 import LoginScreen from './components/LoginScreen.vue';
 import PageNotFound from './components/404.vue';
+import Template from './components/Template.vue';
 
 const routes = [
   { path: '/', component: LoginScreen },
-    { path: '/AddCategory', component: AddCategory },
-    { path: '/Home', component: Home},
-    { path : '/404', component: PageNotFound},
+  { path: '/AddCategory', component: AddCategory },
+  { path: '/Home', component: Home},
+  { path: '/template', component: PageNotFound}
 ]
-
 
 const router = createRouter({
   history: createWebHistory("/"),
   routes,
 })
 
-const app = createApp(Home)
+// const app = createApp(Home)
+const app = createApp(Template)
 
 app.component('Menubar', Menubar);
 app.component('Sidebar', Sidebar);

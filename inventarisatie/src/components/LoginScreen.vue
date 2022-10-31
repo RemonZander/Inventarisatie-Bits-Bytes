@@ -1,8 +1,5 @@
 <template>
-    <!-- <div class="h-full">
-        <router-view></router-view>
-    </div> -->
-    <div class="flex flex-col justify-center items-center w-full m-auto">
+    <div class="flex flex-col justify-center items-center w-1/2 m-auto">
         <p class="text-5xl my-3">Login</p>
         <form class="flex flex-col w-1/2">
             <label>Gebruikersnaam</label>
@@ -14,7 +11,6 @@
         <router-link class="bg-blue-300 hover:bg-blue-200 px-2 py-2 w-1/4 m-2 rounded text-center" to="/Home">
             <button>Temporary Enter</button>
         </router-link>
-
     </div>
 </template>
 
