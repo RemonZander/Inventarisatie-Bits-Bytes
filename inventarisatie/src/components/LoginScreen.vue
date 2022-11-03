@@ -7,12 +7,12 @@
         <form class="w-1/2 m-3">
             <p>Gebruikersnaam</p>
             <input class="w-full border border-black rounded px-2 py-1" placeholder="Vul uw gebruikersnaam" type="text">
-            <p>Wachtwoord</p>
+            <p class="mt-2">Wachtwoord</p>
             <input class="w-full border border-black rounded px-2 py-1" placeholder="Vul uw wachtwoord" type="password" required>
             <p class="underline">Wachtwoord vergeten</p>
         </form>
         <router-link class="bg-blue-300 hover:bg-blue-200 px-2 py-2 w-1/4 m-2 rounded text-center" to="/Home">
-            <button>Temporary Enter</button>
+            <button>Login</button>
         </router-link>
         </div>
     </div>

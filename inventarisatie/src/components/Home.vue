@@ -5,8 +5,8 @@
             <Menubar /> -->
                 <!-- Page Content -->
                 <div class="h-full">
-                    <router-view></router-view>
-                    Hello World
+                    <!-- <router-view></router-view> -->
+                    <p class="h1">Welkom</p>
                 </div>
             <!-- </div>
         </div> -->
