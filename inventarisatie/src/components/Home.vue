@@ -6,7 +6,7 @@
                 <!-- Page Content -->
                 <div class="h-full">
                     <!-- <router-view></router-view> -->
-                    <p class="h1">Welkom</p>
+                    <p class="h1 m-1">Welkom</p>
                 </div>
             <!-- </div>
         </div> -->
@@ -20,7 +20,7 @@
                 open: false,
                 dimmer: true,
                 right: false,
-                logo: require('../assets/bits&bytes logo.jpg')
+                logo: require('../assets/bits&bytes logo.jpg'),
             };
         },
         methods: {

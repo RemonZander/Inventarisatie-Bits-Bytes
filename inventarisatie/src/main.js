@@ -14,7 +14,9 @@ const routes = [
   { path: '/', component: LoginScreen },
   { path: '/AddCategory', component: AddCategory },
   { path: '/Home', component: Home},
-  { path: '/template', component: PageNotFound}
+  { path: '/404', component: PageNotFound},
+  { path: '/Template', redirect: '/404'},
+  { path: '/:catchAll(.*)', redirect:'404'}
 ]
 
 const router = createRouter({
