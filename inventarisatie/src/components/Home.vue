@@ -6,7 +6,7 @@
                 <!-- Page Content -->
                 <div class="h-full">
                     <!-- <router-view></router-view> -->
-                    <p class="h1 m-1">Welkom</p>
+                    <p class="h1">Welkom {username}</p> <!-- later in backend -->
                 </div>
             <!-- </div>
         </div> -->
