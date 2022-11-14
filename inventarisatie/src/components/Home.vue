@@ -6,7 +6,29 @@
                 <!-- Page Content -->
                 <div class="h-full">
                     <!-- <router-view></router-view> -->
-                    <p class="h1">Welkom {username}</p> <!-- later in backend -->
+                    <p class="h1">{{welcomeMessage}}</p> <!-- later in backend -->
+                    <table class="table table-striped table-bordered">
+                        <thead class="bg-dark">
+                        <tr>
+                            <th scope="col">Naam</th>
+                            <th scope="col">Socket</th>
+                            <th scope="col">Chipset</th>
+                            <th scope="col">Formaat</th>
+                            <th scope="col">Opmerkingen</th>
+                            <th scope="col">Locatie</th>
+                        </tr>
+                        </thead>
+                        <tbody id="inventory">
+                            <tr>
+                                <td scope="row">{{inventoryName}}</td>
+                                <td>{{inventorySocket}}</td>
+                                <td>{{inventoryChip}}</td>
+                                <td>{{inventoryFormat}}</td>
+                                <td>{{inventoryComment}}</td>
+                                <td>{{inventoryLocation}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             <!-- </div>
         </div> -->
@@ -14,13 +36,21 @@
 
 <script>
     export default {
-        name: "App",
+        name: "Home",
         data() {
             return {
+                count: 0,
                 open: false,
                 dimmer: true,
                 right: false,
                 logo: require('../assets/bits&bytes logo.jpg'),
+                welcomeMessage: 'Welkom',
+                inventoryName: 'HP531965-001 PRO',
+                inventorySocket: 'LGA775',
+                inventoryChip: 'Q43',
+                inventoryFormat: 'WTX?',
+                inventoryComment: '',
+                inventoryLocation: 'opslag'
             };
         },
         methods: {
@@ -31,7 +61,7 @@
                 }
                 this.open = false;
             }
-        }
+        },
     };
 </script>
 
