@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.post('/newTable', async (req, res) => {
     let table = req.body;
     try {
-        let result = await db.pool.query("create table " + table.name + " (" + table.values + ")");
+        let result = await db.db.run("create table " + table.name + " (" + table.values + ")");
         console.log(result);
         res.send(JSON.stringify(result, (key, value) =>
             typeof value === 'bigint'

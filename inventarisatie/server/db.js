@@ -1,17 +1,18 @@
 // Use the MariaDB Node.js Connector
-var mariadb = require('mariadb');
+const fs = require("fs");
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('database.db');
 
-// Create a connection pool
-var pool =
-    mariadb.createPool({
-        host: "10.10.10.200",
-        port: 3306,
-        user: "remon",
-        password: "Banjocraft1",
-        database: "inventarisatie"
-    });
+const sqlData = fs
+    .readFileSync("database.db.sql", { flag: "r" })
+    .toString()
+    .trim()
+    .split(";");
 
-// Expose a method to establish connection with MariaDB SkySQL
+for (var a = 0; a < sqlData.length - 1; a++) {
+    db.run(sqlData[a]);
+}
+
 module.exports = Object.freeze({
-    pool: pool
+    db: db
 });

@@ -1,12 +1,17 @@
 <template>
-    <div class="ml-[25vw] rounded bg-green-500 w-[50vw] h-[100%] flex justify-center pt-[10vh]">
+    <div class="ml-[25vw] rounded w-[50vw] h-[100%] flex justify-center pt-[10vh]">
         <div class="flex flex-col gap-6">
             <p class="self-center text-[25px]">Categorie toevoegen</p>
-            <div class="flex flex-row justify-between"><a>Naam:</a><input class="ml-[1vw]" type="text" id="NaamCategorie" placeholder="Naam categorie" /></div>
+            <div class="input-group mb-3">
+                <div class="input-group-addon">
+                    <span class="input-group-text" id="basic-addon1">Naam:</span>
+                </div>
+                <input id="CategoryName" type="text" class="form-control" placeholder="Naam" aria-label="PropertyName" aria-describedby="basic-addon1">
+            </div>
 
-
+            <hr class="my-4 mx-auto w-full h-1 bg-gray-100 rounded border-0 md:my-10 dark:bg-gray-700"/>
             <table class="table text-black">
-                <thead>
+                <thead class="bg-gray-200">
                     <tr>
                         <th scope="col">Eigenschap</th>
                         <th scope="col">DataType</th>
@@ -14,7 +19,11 @@
                 </thead>
                 <tbody v-for="eigenschap in Eigenschappen">
                     <tr>
-                        <th scope="row"><input v-bind:id="'eigenschap' + eigenschap.pos" @keyup.enter="Saveproperty(eigenschap.pos)" type="text" class="placeholder-black bg-inherit text-black" v-model="eigenschap.eigenschap" /></th>
+                        <th scope="row">
+                            <div class="input-group mb-3">
+                                <input v-model="eigenschap.eigenschap" class="form-control placeholder-black bg-inherit text-black" v-bind:id="'eigenschap' + eigenschap.pos" @keyup.enter="Saveproperty(eigenschap.pos)"  type="text" placeholder="Eigenschap toevoegen..." aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </th>
                         <td>
                             <div v-bind:id="'dropdown' + eigenschap.pos" class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +41,11 @@
 
                 <tbody>
                     <tr>
-                        <th scope="row"><input id="eigenschap_new" @keyup.enter="Saveproperty(-1)" type="text" class="placeholder-black bg-inherit text-black" placeholder="Eigenschap toevoegen..." /></th>
+                        <th scope="row">
+                            <div class="input-group mb-3">
+                                <input id="eigenschap_new" @keyup.enter="Saveproperty(-1)"  type="text" class="form-control placeholder-black bg-inherit text-black" placeholder="Eigenschap toevoegen..." aria-label="PropertyName" aria-describedby="basic-addon1">
+                            </div>
+                        </th>
                         <td>
                             <div id="dropdown_new" class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,7 +84,7 @@
                 else if (pos === -1) {
                     this.Eigenschappen.push({ pos: this.Eigenschappen[this.Eigenschappen.length - 1].pos + 1, eigenschap: document.getElementById("eigenschap_new").value, datatype: this.DropDownText });
                     this.DropDownText = "kies datatype...";
-                    document.getElementById("eigenschap_new").value = "";                   
+                    document.getElementById("eigenschap_new").value = "";
                     console.log(this.Eigenschappen);
                     return;
                 }
@@ -94,11 +107,11 @@
                 console.log(this.Eigenschappen);
             },
             async sendRequest() {
-                if (document.getElementById('NaamCategorie').value != "") {
+                if (document.getElementById('CategoryName').value != "") {
                     const requestOptions = {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ name: document.getElementById('NaamCategorie').value, values: "test1 varchar(255), test2 varchar(255)" })
+                        body: JSON.stringify({ name: document.getElementById('CategoryName').value, values: "test1 varchar(255), test2 varchar(255)" })
                     };
                     const response = await fetch("http://localhost:8000/newTable", requestOptions);
                     const data = await response.json();
