@@ -11,9 +11,6 @@
                 <router-link to="/AddCategory" class="hover:scale-125 duration-300">
                     <img src="@/assets/plus.png" alt="addModel">
                 </router-link>
-                <!--<button @click.prevent="" class="hover:scale-125 duration-300">
-        <img src="@/assets/plus.png" alt="addModel">
-    </button>-->
                 <button @click.prevent="" class="hover:scale-125 duration-300">
                     <img src="@/assets/motherboard.png" alt="addComponent">
                 </button>
@@ -22,10 +19,10 @@
             <div ref="content"
                  class="transition-all duration-700 bg-[#424C6E] overflow-hidden flex flex-col gap-7"
                  :class="[open ? 'max-w-lg' : 'max-w-0']">
-                <button class="mt-[6.9rem] w-48 text-center font-bold text-[18px] text-black hover:text-[23px] duration-300">
-                    Model toevoegen
+                <button class="mt-[6.9rem] w-48 text-center font-bold text-[17px] text-black hover:text-[22px] duration-300">
+                    Categorie toevoegen
                 </button>
-                <button class="w-48 text-center font-bold text-[18px] text-black hover:text-[23px] duration-300">
+                <button class="w-48 text-center font-bold text-[17px] text-black hover:text-[22px] duration-300">
                     Item toevoegen
                 </button>
             </div>

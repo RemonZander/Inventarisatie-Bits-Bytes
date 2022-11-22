@@ -3,11 +3,6 @@
         <div class="flex items-center justify-between w-full h-full">
             <a class="text-2xl ml-[2rem]">Bits & Bytes inventarisatie</a>
             <input class="mr-[2rem]" type="text" placeholder="Zoek item" />
-
-            <!--<router-link to="/" class="text-xl font-bold text-gray-800 md:text-2xl hover:text-blue-400">
-                Home
-            </router-link>-->
-
         </div>
     </div>
 </template>

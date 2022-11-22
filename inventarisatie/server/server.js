@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.post('/newTable', async (req, res) => {
     let table = req.body;
     try {
-        let result = await db.pool.query("create table " + table.name + " (" + table.values + ")");
+        let result = await db.db.run("create table " + table.name + " (" + table.values + ")");
         console.log(result);
         res.send(JSON.stringify(result, (key, value) =>
             typeof value === 'bigint'
@@ -29,6 +29,35 @@ app.post('/newTable', async (req, res) => {
     }
 });
 
+app.get('/TableTotal', async (req, res) => {
+    let tableName = req.body;
+    try {
+        const result = await db.db.query("select * from " + tableName);
+        console.log(result);
+        res.send(JSON.stringify(result, (key, value) =>
+            typeof value === 'bigint'
+                ? parseInt(value)
+                : value
+        ));
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+app.get('/Component', async (req, res) => {
+    let query = req.body;
+    try {
+        const result = await db.db.query("select * from " + query.tableName + " where " + query.column + " == " + query.Value);
+        console.log(result);
+        res.send(JSON.stringify(result, (key, value) =>
+            typeof value === 'bigint'
+                ? parseInt(value)
+                : value
+        ));
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 /*// GET
 app.get('/tasks', async (req, res) => {
