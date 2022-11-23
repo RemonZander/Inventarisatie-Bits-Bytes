@@ -3,6 +3,7 @@ const db = require('./db')
 const app = express()
 const port = 8000
 const bodyParser = require("body-parser");
+const { objectToString } = require('@vue/shared');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +18,7 @@ app.use((req, res, next) => {
 app.post('/newTable', async (req, res) => {
     let table = req.body;
     try {
-        let result = await db.db.run("create table " + table.name + " (" + table.values + ")");
+        let result = db.run("create table " + table.name + " (" + table.values + ")");
         console.log(result);
         res.send(JSON.stringify(result, (key, value) =>
             typeof value === 'bigint'
@@ -29,25 +30,25 @@ app.post('/newTable', async (req, res) => {
     }
 });
 
-app.get('/TableTotal', async (req, res) => {
-    let tableName = req.body;
-    try {
-        const result = await db.db.query("select * from " + tableName);
-        console.log(result);
-        res.send(JSON.stringify(result, (key, value) =>
-            typeof value === 'bigint'
-                ? parseInt(value)
-                : value
-        ));
-    } catch (err) {
-        console.log(err);
-    }
+app.post('/TableTotal', async (req, res) => {
+    let tableName = req.body.tableName;
+    console.log(req.body);
+    db.all("select * from " + tableName, (err, data) => {
+        if (err) {
+            console.log(err);
+          }
+          res.send(JSON.stringify(data, (_key, value) =>
+              typeof value === 'bigint'
+                  ? parseInt(value)
+                  : value
+          ));
+    });   
 });
 
 app.get('/Component', async (req, res) => {
     let query = req.body;
     try {
-        const result = await db.db.query("select * from " + query.tableName + " where " + query.column + " == " + query.Value);
+        const result = await db.query("select * from " + query.tableName + " where " + query.column + " == " + query.Value);
         console.log(result);
         res.send(JSON.stringify(result, (key, value) =>
             typeof value === 'bigint'

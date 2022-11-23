@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
 import '@/assets/css/tailwind.css'
 import Home from './components/Home.vue';
-import HomeContent from './components/HomeContent.vue';
 import AddCategory from './components/AddCategory.vue';
 import Menubar from './components/Menubar.vue';
 import Sidebar from './components/Sidebar.vue';

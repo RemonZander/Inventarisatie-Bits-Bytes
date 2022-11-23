@@ -61,7 +61,7 @@
                     </tr>
                 </tbody>
             </table>
-
+            
             <button class="text-[20px] mt-[10vh]" @click.prevent="sendRequest()">Categorie toevoegen</button>
         </div>
     </div>
@@ -111,7 +111,7 @@
                     const requestOptions = {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ name: document.getElementById('CategoryName').value, values: "test1 varchar(255), test2 varchar(255)" })
+                        body: JSON.stringify({ name: document.getElementById('CategoryName').value, values: "test1 TEXT, test2 TEXT" })
                     };
                     const response = await fetch("http://localhost:8000/newTable", requestOptions);
                     const data = await response.json();
