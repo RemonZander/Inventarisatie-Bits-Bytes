@@ -13,7 +13,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="categoryButton">
                             <a class="dropdown-item" @click="createTableContent('Motherbord')" href="#">Moederborden</a>
-                            <a class="dropdown-item" href="#">CPU's</a>
+                            <a class="dropdown-item" @click="createTableContent('CPUs')" href="#">CPU's</a>
                             <a class="dropdown-item disabled" href="#">Voedingen</a>
                             <a class="dropdown-item disabled" href="#">Kasten</a>
                             <a class="dropdown-item disabled" href="#">RAM</a>
@@ -22,28 +22,18 @@
                         </ul>
                     </div>
                     <div id="tableContent">
-                    <!-- <table id="tableMotherbord" class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered">
                         <thead class="bg-dark">
                         <tr>
-                            <th scope="col">Naam</th>
-                            <th scope="col">Socket</th>
-                            <th scope="col">Chipset</th>
-                            <th scope="col">Formaat</th>
-                            <th scope="col">Locatie</th>
-                            <th scope="col">Opmerkingen</th>
+                            <th scope="col" v-for="key in Object.keys(tableData[0])">{{key}}</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="row">{{inventoryName}}</td>
-                                <td>{{inventorySocket}}</td>
-                                <td>{{inventoryChip}}</td>
-                                <td>{{inventoryFormat}}</td>
-                                <td>{{inventoryLocation}}</td>
-                                <td>{{inventoryComment}}</td>
+                            <tr v-for="(item, index) in tableData">                             
+                                <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
                             </tr>
                         </tbody>
-                    </table> -->
+                    </table>
                     </div>
                 </div>
             <!-- </div>
@@ -61,12 +51,7 @@
                 right: false,
                 logo: require('../assets/bits&bytes logo.jpg'),
                 welcomeMessage: 'Welkom',
-                // inventoryName: 'HP531965-001 PRO',
-                // inventorySocket: 'LGA775',
-                // inventoryChip: 'Q43',
-                // inventoryFormat: 'WTX?',
-                // inventoryComment: '',
-                // inventoryLocation: 'opslag'
+                tableData: [{test: "hoi"}],
             };
         },
         methods: {
@@ -84,9 +69,8 @@
                         body: JSON.stringify({ tableName: tableName })
                     };
                     const response = await fetch("http://localhost:8000/TableTotal", requestOptions);
-                    console.log(response);
-                    const data = await response.json();
-                    console.log(data);
+                    this.tableData = await response.json();
+                    // console.log(this.tableData);
             },
         },
     };

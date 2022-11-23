@@ -32,7 +32,6 @@ app.post('/newTable', async (req, res) => {
 
 app.post('/TableTotal', async (req, res) => {
     let tableName = req.body.tableName;
-    console.log(req.body);
     db.all("select * from " + tableName, (err, data) => {
         if (err) {
             console.log(err);
