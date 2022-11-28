@@ -1,7 +1,0 @@
-moederborden
-CPU's
-voedingen
-kasten
-RAM
-koelers
-expansion cards

@@ -9,16 +9,18 @@
                     <p class="h1">{{welcomeMessage}}</p> <!-- later in backend -->
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categorie
+                            {{categoryText}}
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="categoryButton">
-                            <a class="dropdown-item" @click="createTableContent('Motherbord')" href="#">Moederborden</a>
-                            <a class="dropdown-item" @click="createTableContent('CPUs')" href="#">CPU's</a>
-                            <a class="dropdown-item disabled" href="#">Voedingen</a>
-                            <a class="dropdown-item disabled" href="#">Kasten</a>
+                        <!-- idee: het zichtbaar maken van op welk categorie je zit te kijken -->
+                        <ul class="dropdown-menu" aria-labelledby="categoryButton"> 
+                            <a class="dropdown-item" @click="createTableContent('Motherbord'), saveCategory('Moederborden')" href="#">Moederborden</a>
+                            <a class="dropdown-item" @click="createTableContent('CPUs'), saveCategory(`CPU's`)" href="#">CPU's</a>
+                            <a class="dropdown-item" @click="createTableContent('PSUs'), saveCategory(`Voedingen`)" href="#">Voedingen</a>
+                            <a class="dropdown-item" @click="createTableContent('PC_Cases'), saveCategory(`Kasten`)" href="#">Kasten</a>
                             <a class="dropdown-item disabled" href="#">RAM</a>
-                            <a class="dropdown-item disabled" href="#">Koelers</a>
+                            <a class="dropdown-item" @click="createTableContent('Coolers'), saveCategory(`Koelers`)" href="#">Koelers</a>
                             <a class="dropdown-item disabled" href="#">Uitbreidingskaarten</a>
+                            <!-- Uitbreidingskaarten, HDD, SDD, Routers en Switches hebben nog geen data in database-->
                         </ul>
                     </div>
                     <div id="tableContent">
@@ -52,6 +54,7 @@
                 logo: require('../assets/bits&bytes logo.jpg'),
                 welcomeMessage: 'Welkom',
                 tableData: [{test: "hoi"}],
+                categoryText: 'kies categorie...'
             };
         },
         methods: {
@@ -70,7 +73,11 @@
                     };
                     const response = await fetch("http://localhost:8000/TableTotal", requestOptions);
                     this.tableData = await response.json();
-                    // console.log(this.tableData);
+                    console.log(this.tableData);
+            },
+            saveCategory(categoryText) {
+                this.categoryText = categoryText;
+                console.log(this.categoryText)
             },
         },
     };

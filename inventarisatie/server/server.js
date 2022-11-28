@@ -20,7 +20,7 @@ app.post('/newTable', async (req, res) => {
     try {
         let result = db.run("create table " + table.name + " (" + table.values + ")");
         console.log(result);
-        res.send(JSON.stringify(result, (key, value) =>
+        res.send(JSON.stringify(result, (_key, value) =>
             typeof value === 'bigint'
                 ? parseInt(value)
                 : value
@@ -49,7 +49,7 @@ app.get('/Component', async (req, res) => {
     try {
         const result = await db.query("select * from " + query.tableName + " where " + query.column + " == " + query.Value);
         console.log(result);
-        res.send(JSON.stringify(result, (key, value) =>
+        res.send(JSON.stringify(result, (_key, value) =>
             typeof value === 'bigint'
                 ? parseInt(value)
                 : value
