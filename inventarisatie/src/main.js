@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp } from "vue";
 import { createRouter, createWebHistory } from 'vue-router/dist/vue-router';
 import '@/assets/css/tailwind.css'
 import Home from './components/Home.vue';

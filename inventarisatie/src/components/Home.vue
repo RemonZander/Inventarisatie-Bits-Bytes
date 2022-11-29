@@ -20,23 +20,28 @@
                             <a class="dropdown-item disabled" href="#">RAM</a>
                             <a class="dropdown-item" @click="createTableContent('Coolers'), saveCategory(`Koelers`)" href="#">Koelers</a>
                             <a class="dropdown-item disabled" href="#">Uitbreidingskaarten</a>
+                            <a class="dropdown-item disabled" href="#">HDD's en SDD's</a>
+                            <a class="dropdown-item disabled" href="#">Switches</a>
                             <!-- Uitbreidingskaarten, HDD, SDD, Routers en Switches hebben nog geen data in database-->
                         </ul>
                     </div>
                     <div id="tableContent">
-                    <table class="table table-striped table-bordered">
-                        <thead class="bg-dark">
-                        <tr>
-                            <th scope="col" v-for="key in Object.keys(tableData[0])">{{key}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, index) in tableData">                             
-                                <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
+                        <div class="overflow-y-scroll h-[75vh]">                   
+                        <table class="table-striped table-bordered w-full">
+                            <thead class="bg-dark">
+                            <tr>
+                                <th scope="col" v-for="key in Object.keys(tableData[0])">{{key}}</th>
                             </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item, index) in tableData">                             
+                                    <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
+                                    <td>test</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
                 </div>
             <!-- </div>
         </div> -->
