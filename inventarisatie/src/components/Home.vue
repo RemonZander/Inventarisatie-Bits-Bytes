@@ -12,7 +12,7 @@
                             {{categoryText}}
                         </button>
                         <!-- idee: het zichtbaar maken van op welk categorie je zit te kijken -->
-                        <ul class="dropdown-menu" aria-labelledby="categoryButton"> 
+                        <ul class="dropdown-menu" aria-labelledby="categoryButton" @click="(showpopup = close)"> 
                             <a class="dropdown-item" @click="createTableContent('Motherbord'), saveCategory('Moederborden')" href="#">Moederborden</a>
                             <a class="dropdown-item" @click="createTableContent('CPUs'), saveCategory(`CPU's`)" href="#">CPU's</a>
                             <a class="dropdown-item" @click="createTableContent('PSUs'), saveCategory(`Voedingen`)" href="#">Voedingen</a>
@@ -36,12 +36,17 @@
                             <tbody>
                                 <tr v-for="(item, index) in tableData">                             
                                     <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
-                                    <td>test</td>
+                                    <td><button id="showModal" @click="(showpopup = !showpopup)">test</button></td>
+                                    <!-- knop for acties (stuurt door naar een pagina met hetzelfde informatie over de item, met ook bewerken/verwijderen) -->
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
+                        <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2  transform -translate-x-1/2 -translate-y-1/2">
+                            <h1>hoi</h1>
+                            <button class="btn text-center absolute bottom-0 inset-x-40" @click="(showpopup = close)">Sluiten</button>
+                        </div>
                     </div>
-                </div>
                 </div>
             <!-- </div>
         </div> -->
@@ -59,7 +64,8 @@
                 logo: require('../assets/bits&bytes logo.jpg'),
                 welcomeMessage: 'Welkom',
                 tableData: [{test: "hoi"}],
-                categoryText: 'kies categorie...'
+                categoryText: 'kies categorie...',
+                showpopup: false
             };
         },
         methods: {

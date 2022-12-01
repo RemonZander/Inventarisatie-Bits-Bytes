@@ -14,7 +14,6 @@ const routes = [
   { path: '/AddCategory', component: AddCategory },
   { path: '/Home', component: Home},
   { path: '/404', component: PageNotFound},
-  { path: '/Template', redirect: '/404'},
   { path: '/:catchAll(.*)', redirect:'/404'}
 ]
 
