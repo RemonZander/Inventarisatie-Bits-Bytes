@@ -30,21 +30,21 @@
                         <table class="table-striped table-bordered w-full">
                             <thead class="bg-dark">
                             <tr>
-                                <th scope="col" v-for="key in Object.keys(tableData[0])">{{key}}</th>
+                                <th scope="col" v-for="key in Object.keys(tableData[0])">{{key}}</th> <!-- key = property -->
                             </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(item, index) in tableData">                             
                                     <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
-                                    <td><button id="showModal" @click="(showpopup = !showpopup)">test</button></td>
+                                    <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)">test</button></td>
+                                    <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2  transform -translate-x-1/2 -translate-y-1/2">
+                                        <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p>
+                                        <button class="btn text-center absolute bottom-0 inset-x-40" @click="(showpopup = close)">Sluiten</button>
+                                    </div>
                                     <!-- knop for acties (stuurt door naar een pagina met hetzelfde informatie over de item, met ook bewerken/verwijderen) -->
                                 </tr>
                             </tbody>
                         </table>
-                        </div>
-                        <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2  transform -translate-x-1/2 -translate-y-1/2">
-                            <h1>hoi</h1>
-                            <button class="btn text-center absolute bottom-0 inset-x-40" @click="(showpopup = close)">Sluiten</button>
                         </div>
                     </div>
                 </div>
@@ -64,6 +64,7 @@
                 logo: require('../assets/bits&bytes logo.jpg'),
                 welcomeMessage: 'Welkom',
                 tableData: [{test: "hoi"}],
+                itemData: [],
                 categoryText: 'kies categorie...',
                 showpopup: false
             };
@@ -85,6 +86,10 @@
                     const response = await fetch("http://localhost:8000/TableTotal", requestOptions);
                     this.tableData = await response.json();
                     console.log(this.tableData);
+            },
+            async popupContent(item) {
+                this.itemData = item;
+                console.log(item)
             },
             saveCategory(categoryText) {
                 this.categoryText = categoryText;
