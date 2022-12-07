@@ -38,8 +38,15 @@
                                     <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
                                     <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)">test</button></td>
                                     <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2  transform -translate-x-1/2 -translate-y-1/2">
-                                        <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p>
-                                        <button class="btn text-center absolute bottom-0 inset-x-40" @click="(showpopup = close)">Sluiten</button>
+                                        <div><!-- <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p> -->
+                                            <p class="flex items-center" v-for="key in Object.keys(itemData)">{{key + ": "}}
+                                                <span class=" input-group-addon input-group-text mx-1 py-1">{{itemData[key]}}</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <button class="btn text-center absolute bottom-0 left-0 inset-x-1/2" @click="say('Dit heeft nog geen functie')">Verwijderen</button>
+                                            <button class="btn text-center absolute bottom-0 right-0 inset-x-1/2" @click="(showpopup = close)">Sluiten</button>
+                                        </div>
                                     </div>
                                     <!-- knop for acties (stuurt door naar een pagina met hetzelfde informatie over de item, met ook bewerken/verwijderen) -->
                                 </tr>
@@ -95,6 +102,9 @@
                 this.categoryText = categoryText;
                 console.log(this.categoryText)
             },
+            say(message) {
+    	        alert(message)
+  	        }
         },
     };
 </script>
