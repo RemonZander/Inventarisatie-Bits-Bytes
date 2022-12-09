@@ -36,18 +36,21 @@
                             <tbody>
                                 <tr v-for="(item, index) in tableData">                             
                                     <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
-                                    <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)">test</button></td>
-                                    <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2  transform -translate-x-1/2 -translate-y-1/2">
-                                        <div><!-- <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p> -->
-                                            <p class="flex items-center" v-for="key in Object.keys(itemData)">{{key + ": "}}
-                                                <span class=" input-group-addon input-group-text mx-1 py-1">{{itemData[key]}}</span>
-                                            </p>
-                                        </div>
+                                    <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)">knop</button></td>
+                                    <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <!-- <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p> -->
+                                        <p class="flex items-center" v-for="key in Object.keys(itemData)">
+                                            <span class="text-left">{{key + ": "}}</span>
+                                            <span class="input-group-addon input-group-text text-left w-1/2 h-7 mx-1 my-0.5">{{itemData[key]}}</span>
+                                            <button v-if="(key === 'ID' || key === 'UID')" class="disabled:opacity-25" disabled><img class="w-7 h-7" src="@/assets/editIcon.png"></button>
+                                            <button v-else-if="key"><img class="w-7 h-7" src="@/assets/editIcon.png"></button>
+                                        </p>
                                         <div>
                                             <button class="btn text-center absolute bottom-0 left-0 inset-x-1/2" @click="say('Dit heeft nog geen functie')">Verwijderen</button>
-                                            <button class="btn text-center absolute bottom-0 right-0 inset-x-1/2" @click="(showpopup = close)">Sluiten</button>
+                                            <button class="btn text-center absolute bottom-0 right-0 inset-x-1/2" @click="(showpopup = close)">Opslaan</button>
                                         </div>
                                     </div>
+                                    <!-- v-if checken -->
                                     <!-- knop for acties (stuurt door naar een pagina met hetzelfde informatie over de item, met ook bewerken/verwijderen) -->
                                 </tr>
                             </tbody>
