@@ -30,20 +30,18 @@
                         <table class="table-striped table-bordered w-full">
                             <thead class="bg-dark">
                             <tr>
-                                <th scope="col" v-for="key in Object.keys(tableData[0])">{{key}}</th> <!-- key = property -->
+                                <th scope="col" v-for="key in Object.keys(tableData[0])" :hidden="key === 'ID' ? true : false">{{key}}</th> <!-- key = property -->
                             </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in tableData">                             
-                                    <td scope="row" v-for="key in Object.keys(item)">{{tableData[index][key]}}</td>
-                                    <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)">knop</button></td>
-                                    <div v-show="showpopup" class="bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <tr v-for="(item, index) in tableData">                            
+                                    <td scope="row" v-for="key in Object.keys(item)" :hidden="key === 'ID' ? true : false">{{tableData[index][key]}}</td>
+                                    <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)"><img class="h-5 w-5" src="@/assets/editIcon.png"></button></td>
+                                    <div v-show="showpopup" class="flex flex-col bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                         <!-- <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p> -->
                                         <p class="flex items-center" v-for="key in Object.keys(itemData)">
                                             <span class="text-left">{{key + ": "}}</span>
-                                            <span class="input-group-addon input-group-text text-left w-1/2 h-7 mx-1 my-0.5">{{itemData[key]}}</span>
-                                            <button v-if="(key === 'ID' || key === 'UID')" class="disabled:opacity-25" disabled><img class="w-7 h-7" src="@/assets/editIcon.png"></button>
-                                            <button v-else-if="key"><img class="w-7 h-7" src="@/assets/editIcon.png"></button>
+                                            <input v-model="itemData[key]" :disabled="key === 'ID' || key === 'UID' ? true : false" class="input-group-addon input-group-text text-left w-1/2 h-7 mx-1 my-0.5" maxlength="100"/>
                                         </p>
                                         <div>
                                             <button class="btn text-center absolute bottom-0 left-0 inset-x-1/2" @click="say('Dit heeft nog geen functie')">Verwijderen</button>
@@ -97,9 +95,12 @@
                     this.tableData = await response.json();
                     console.log(this.tableData);
             },
-            async popupContent(item) {
+            popupContent(item) {
                 this.itemData = item;
                 console.log(item)
+            },
+            enableEdit(key) {
+                //document.getElementById(key).
             },
             saveCategory(categoryText) {
                 this.categoryText = categoryText;
