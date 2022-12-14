@@ -37,15 +37,17 @@
                                 <tr v-for="(item, index) in tableData">                            
                                     <td scope="row" v-for="key in Object.keys(item)" :hidden="key === 'ID' ? true : false">{{tableData[index][key]}}</td>
                                     <td><button id="showModal" @click="(showpopup = !showpopup), popupContent(item)"><img class="h-5 w-5" src="@/assets/editIcon.png"></button></td>
-                                    <div v-show="showpopup" class="flex flex-col bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-1/2 h-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <div v-show="showpopup" class="flex flex-col bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-[35vw] h-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                         <!-- <p v-for="key in Object.keys(itemData)">{{key + ": " + itemData[key]}}</p> -->
-                                        <p class="flex items-center" v-for="key in Object.keys(itemData)">
-                                            <span class="text-left">{{key + ": "}}</span>
-                                            <input v-model="itemData[key]" :disabled="key === 'ID' || key === 'UID' ? true : false" class="input-group-addon input-group-text text-left w-1/2 h-7 mx-1 my-0.5" maxlength="100"/>
+                                        <p class="flex flex-row justify-start" v-for="key in Object.keys(itemData)">
+                                            <div class="flex flex-row items-center justify-end w-3/4 ml-[1vw]">
+                                                <span class="text-left">{{key + ": "}}</span>
+                                                <input v-model="itemData[key]" :disabled="key === 'ID' || key === 'UID' ? true : false" class="self-end input-group-addon input-group-text text-left w-[18vw] h-7 mx-1 my-0.5" :class="key === 'ID' || key === 'UID' ? '' : 'bg-white'" maxlength="100"/>
+                                            </div>
                                         </p>
                                         <div>
                                             <button class="btn text-center absolute bottom-0 left-0 inset-x-1/2" @click="say('Dit heeft nog geen functie')">Verwijderen</button>
-                                            <button class="btn text-center absolute bottom-0 right-0 inset-x-1/2" @click="(showpopup = close)">Opslaan</button>
+                                            <button class="btn text-center absolute bottom-0 right-0 inset-x-1/2" @click="tableData[index] = itemData; showpopup = !showpopup">Opslaan</button>
                                         </div>
                                     </div>
                                     <!-- v-if checken -->
@@ -96,8 +98,11 @@
                     console.log(this.tableData);
             },
             popupContent(item) {
-                this.itemData = item;
-                console.log(item)
+                this.itemData = [];
+                const keys = Object.keys(item);
+                for (let index = 0; index < keys.length; index++) {
+                    this.itemData[keys[index]] = item[keys[index]];
+                }             
             },
             enableEdit(key) {
                 //document.getElementById(key).
@@ -108,7 +113,11 @@
             },
             say(message) {
     	        alert(message)
-  	        }
+  	        },
+            // saveItem(index){
+            //     this.tableData[index] = this.itemData;
+            //     console.log(index);
+            // }
         },
     };
 </script>
