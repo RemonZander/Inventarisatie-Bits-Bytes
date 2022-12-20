@@ -12,7 +12,7 @@ async function Main() {
 
     for (var a = 0; a < sqlData.length - 1; a++) {
         console.log(sqlData[a]);
-        db.db.run(sqlData[a]);
+        db.run(sqlData[a]);
         await sleep(15);
     }
 
@@ -24,7 +24,7 @@ async function Main() {
 
     for (var a = 0; a < sqlData.length - 1; a++) {
         console.log(sqlData[a]);
-        db.db.run(sqlData[a]);
+        db.run(sqlData[a]);
         await sleep(15);
     }
 }

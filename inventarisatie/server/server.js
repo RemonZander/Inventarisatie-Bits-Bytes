@@ -44,6 +44,25 @@ app.post('/TableTotal', async (req, res) => {
     });   
 });
 
+app.delete('/RemoveComponent', async (req, res) => {
+    const tableName = req.body.tableName;
+    const UID = req.body.UID;
+
+    try{
+        const result = await db.run("DELETE FROM " + tableName + " WHERE UID = '" + UID + "'");
+        console.log(result);
+        res.send(JSON.stringify(result, (_key, value) =>
+            typeof value === 'bigint'
+                ? parseInt(value)
+                : value
+        ));
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+
 app.get('/Component', async (req, res) => {
     let query = req.body;
     try {

@@ -38,9 +38,10 @@
                                             </div>
                                         </p>
                                         <div>
-                                            <button class="btn text-center absolute bottom-0 left-0 inset-x-1/2" @click="removeItem()">Verwijderen</button>
+                                            <button class="btn text-center absolute bottom-0 left-0 inset-x-1/2" @click="confirmRemoveItem()">Verwijderen</button>
                                             <button class="btn text-center absolute bottom-0 right-0 inset-x-1/2" @click="saveItem()">Opslaan</button>
                                             <!-- bevestigingsscherm nodig -->
+                                            <p id="confirmation"></p>
                                         </div>
                                     </div>
                                     <!-- v-if checken -->
@@ -68,6 +69,7 @@
                 itemData: [],
                 categoryText: 'kies categorie...',
                 recordNumber: 0,
+                selectedTable: '',
             };
         },
         methods: {
@@ -79,6 +81,7 @@
                 this.open = false;
             },
             async createTableContent(tableName) {
+                this.selectedTable = tableName;
                 const requestOptions = {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -102,20 +105,26 @@
                 this.tableData[this.recordNumber] = this.itemData; 
                 this.$store.commit('Closepopup'); 
             },
-            // Closepopup(){
-            //     console.log(this.showpopup);
-            //     console.log(this.popupInteraction);
-            //     if (this.showpopup && !this.popupInteraction){
-            //         this.showpopup = !this.showpopup;
-            //     }
-            //     else if (this.popupInteraction){
-            //         this.popupInteraction = false;
-            //     }
-            // },
-            removeItem(){
+            async removeItem(){
+                const requestOptions = {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ tableName: this.selectedTable, UID: this.itemData.UID })
+                };
+                const response = await fetch("http://localhost:8000/RemoveComponent", requestOptions);
+
                 this.tableData.splice(this.recordNumber, 1);
                 this.$store.commit('Closepopup');
                 this.itemData = [];
+
+                //setupDatabase.js voor terugbrengen Database
+            },
+            confirmRemoveItem(){
+                if (confirm("Weet u zeker dat u dit wilt verwijderen?")) {
+                    this.removeItem()
+                } else {
+
+                }
             },
             say(message) {
     	        alert(message);
