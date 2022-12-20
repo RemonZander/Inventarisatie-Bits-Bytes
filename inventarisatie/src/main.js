@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar.vue';
 import LoginScreen from './components/LoginScreen.vue';
 import PageNotFound from './components/404.vue';
 import Template from './components/Template.vue';
+import { createStore } from 'vuex'
 
 const routes = [
   { path: '/', component: LoginScreen },
@@ -22,12 +23,34 @@ const router = createRouter({
   routes,
 })
 
+const store = createStore({
+  state () {
+    return {
+      showpopup: false,
+      popupInteraction: false,
+    }
+  },
+  mutations: {
+    Closepopup(state){
+      if (state.showpopup && !state.popupInteraction){
+        state.showpopup = !state.showpopup;
+      }
+      else if (state.popupInteraction){
+        state.popupInteraction = false;
+      }
+  },
+  }
+});
+
 // const app = createApp(Home)
-const app = createApp(Template)
+const app = createApp(Template);
+app.config.globalProperties.showpopup = false;
+app.config.globalProperties.popupInteraction = false;
 
 app.component('Menubar', Menubar);
 app.component('Sidebar', Sidebar);
 
-app.use(router)
+app.use(store);
+app.use(router);
 
-app.mount('#app')
+app.mount('#app');

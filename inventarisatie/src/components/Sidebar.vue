@@ -1,5 +1,5 @@
 <template>
-    <div class="inset-0 flex z-40">
+    <div class="inset-0 flex z-40" @click="this.$store.commit('Closepopup')">
         <!-- Sidebar -->
         <div class="flex top-0 h-screen z-20"
              :class="[right ? 'right-0 flex-row' : 'left-0 flex-row-reverse']">

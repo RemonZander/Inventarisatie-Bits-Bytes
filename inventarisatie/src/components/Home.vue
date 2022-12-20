@@ -1,8 +1,8 @@
 <template>
             <!-- Page Content -->
-                <div class="h-full" @click="Closepopup()">
+                <div class="h-full" @click="this.$store.commit('Closepopup')">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="categoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{categoryText}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="categoryButton"> 
@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                     <div id="tableContent">
-                        <div class="overflow-y-scroll h-[80vh]">                   
+                        <div class="overflow-y-auto m-2 h-[80vh]">                   
                         <table class="table-striped table-bordered w-full">
                             <thead class="bg-dark">
                             <tr>
@@ -30,7 +30,7 @@
                                 <tr v-for="(item, index) in tableData">                            
                                     <td scope="row" v-for="key in Object.keys(item)" :hidden="key === 'ID' ? true : false">{{tableData[index][key]}}</td>
                                     <td><button id="showModal" @click="popupContent(item, index)"><img class="h-5 w-5" src="@/assets/editIcon.png"></button></td>
-                                    <div v-show="showpopup" class="flex flex-col bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-[35vw] h-1/2 transform -translate-x-1/2 -translate-y-1/2" @click="popupInteraction = true;">
+                                    <div v-show="this.$store.state.showpopup" class="flex flex-col bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-[35vw] h-1/2 transform -translate-x-1/2 -translate-y-1/2" @click="this.$store.state.popupInteraction = true;">
                                         <p class="flex flex-row justify-start" v-for="key in Object.keys(itemData)">
                                             <div class="flex flex-row items-center justify-end w-3/4 ml-[1vw]">
                                                 <span class="text-left">{{key + ": "}}</span>
@@ -67,9 +67,7 @@
                 tableData: [{test: "hoi"}],
                 itemData: [],
                 categoryText: 'kies categorie...',
-                showpopup: false,
                 recordNumber: 0,
-                popupInteraction: false,
             };
         },
         methods: {
@@ -91,30 +89,32 @@
                     console.log(this.tableData);
             },
             popupContent(item, index) {
-                this.popupInteraction = true;
+                this.$store.state.popupInteraction = true;
                 this.itemData = [];
                 const keys = Object.keys(item);
                 for (let index = 0; index < keys.length; index++) {
                     this.itemData[keys[index]] = item[keys[index]];
                 };
-                this.recordNumber = index;  
-                this.showpopup = true;                   
+                this.recordNumber = index;
+                this.$store.state.showpopup = true;
             },
             saveItem(){
                 this.tableData[this.recordNumber] = this.itemData; 
-                this.showpopup = !this.showpopup; 
+                this.$store.commit('Closepopup'); 
             },
-            Closepopup(){
-                if (this.showpopup && !this.popupInteraction){;
-                    this.showpopup = !this.showpopup;
-                }
-                else if (this.popupInteraction){
-                    this.popupInteraction = false;
-                }
-            },
+            // Closepopup(){
+            //     console.log(this.showpopup);
+            //     console.log(this.popupInteraction);
+            //     if (this.showpopup && !this.popupInteraction){
+            //         this.showpopup = !this.showpopup;
+            //     }
+            //     else if (this.popupInteraction){
+            //         this.popupInteraction = false;
+            //     }
+            // },
             removeItem(){
                 this.tableData.splice(this.recordNumber, 1);
-                this.showpopup = false;
+                this.$store.commit('Closepopup');
                 this.itemData = [];
             },
             say(message) {
