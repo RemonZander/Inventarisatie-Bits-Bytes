@@ -8,6 +8,9 @@
                 <button @click.prevent="toggle(false)" class="mt-[3rem] hover:scale-125 duration-300">
                     <img src="@/assets/menu-icon.png" alt="menu">
                 </button>
+                <router-link to="/Home" class="hover:scale-125 duration-300">
+                    <img src="@/assets/home.png" alt="goHome">
+                </router-link>
                 <router-link to="/AddCategory" class="hover:scale-125 duration-300">
                     <img src="@/assets/plus.png" alt="addModel">
                 </router-link>
@@ -20,6 +23,9 @@
                  class="transition-all duration-700 bg-[#424C6E] overflow-hidden flex flex-col gap-7"
                  :class="[open ? 'max-w-lg' : 'max-w-0']">
                 <button class="mt-[6.9rem] w-48 text-center font-bold text-[17px] text-black hover:text-[22px] duration-300">
+                    Home-Scherm
+                </button>
+                <button class="w-48 text-center font-bold text-[17px] text-black hover:text-[22px] duration-300">
                     Categorie toevoegen
                 </button>
                 <button class="w-48 text-center font-bold text-[17px] text-black hover:text-[22px] duration-300">
