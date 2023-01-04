@@ -23,12 +23,12 @@
                         <table class="table-striped table-bordered w-full">
                             <thead class="bg-dark">
                             <tr>
-                                <th scope="col" v-for="key in Object.keys(tableData[0])" :hidden="key === 'ID' ? true : false">{{key}}</th> <!-- key = property -->
+                                <th scope="col" v-for="key in Object.keys(this.$store.state.tableData[0])" :hidden="key === 'ID' ? true : false">{{key}}</th> <!-- key = property -->
                             </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in tableData">                            
-                                    <td scope="row" v-for="key in Object.keys(item)" :hidden="key === 'ID' ? true : false">{{tableData[index][key]}}</td>
+                                <tr v-for="(item, index) in this.$store.state.tableData">                            
+                                    <td scope="row" v-for="key in Object.keys(item)" :hidden="key === 'ID' ? true : false">{{this.$store.state.tableData[index][key]}}</td>
                                     <td><button id="showModal" @click="popupContent(item, index)"><img class="h-5 w-5" src="@/assets/editIcon.png"></button></td>
                                     <div v-show="this.$store.state.showpopup" class="flex flex-col bg-green-100 absolute border-solid border-4 border-black inset-1/2 w-[35vw] h-1/2 transform -translate-x-1/2 -translate-y-1/2" @click="this.$store.state.popupInteraction = true;">
                                         <p class="flex flex-row justify-start" v-for="key in Object.keys(itemData)">
@@ -65,7 +65,6 @@
                 dimmer: true,
                 right: false,
                 logo: require('../assets/bits&bytes logo.jpg'),
-                tableData: [{test: "hoi"}],
                 itemData: [],
                 categoryText: 'kies categorie...',
                 recordNumber: 0,
@@ -81,6 +80,7 @@
                 this.open = false;
             },
             async createTableContent(tableName) {
+                this.$store.state.tempTableData = [];
                 this.selectedTable = tableName;
                 const requestOptions = {
                         method: "POST",
@@ -88,8 +88,8 @@
                         body: JSON.stringify({ tableName: tableName })
                     };
                     const response = await fetch("http://localhost:8000/TableTotal", requestOptions);
-                    this.tableData = await response.json();
-                    console.log(this.tableData);
+                    this.$store.state.tableData = await response.json();
+                    console.log(this.$store.state.tableData);
             },
             popupContent(item, index) {
                 this.$store.state.popupInteraction = true;
@@ -102,7 +102,7 @@
                 this.$store.state.showpopup = true;
             },
             saveItem(){
-                this.tableData[this.recordNumber] = this.itemData; 
+                this.$store.state.tableData[this.recordNumber] = this.itemData; 
                 this.$store.commit('Closepopup'); 
             },
             async removeItem(){
@@ -113,7 +113,7 @@
                 };
                 const response = await fetch("http://localhost:8000/RemoveComponent", requestOptions);
 
-                this.tableData.splice(this.recordNumber, 1);
+                this.$store.state.tableData.splice(this.recordNumber, 1);
                 this.$store.commit('Closepopup');
                 this.itemData = [];
 

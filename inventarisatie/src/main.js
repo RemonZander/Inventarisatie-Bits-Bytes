@@ -28,6 +28,8 @@ const store = createStore({
     return {
       showpopup: false,
       popupInteraction: false,
+      tableData: [{test: "hoi"}],
+      tempTableData: [],
     }
   },
   mutations: {

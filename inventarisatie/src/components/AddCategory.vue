@@ -13,7 +13,7 @@
             <table class="table text-black">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th scope="col">Eigenschap</th>
+                        <th scope="col">Eigenschap</th> <!-- =keys -->
                         <th scope="col">DataType</th>
                     </tr>
                 </thead>
