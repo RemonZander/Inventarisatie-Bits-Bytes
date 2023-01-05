@@ -44,6 +44,7 @@
                                             <p id="confirmation"></p>
                                         </div>
                                     </div>
+                                    <!-- popup voor geen resultaten -->
                                     <!-- v-if checken -->
                                 </tr>
                             </tbody>

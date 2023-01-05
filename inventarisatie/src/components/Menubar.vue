@@ -36,6 +36,7 @@
                     this.$store.state.tempTableData = [];
                     return;
                 }
+
                 const keys = Object.keys(this.$store.state.tableData[0]);
                 let searchData = [];
                 console.log(searchKey);
@@ -46,13 +47,15 @@
                         if (this.$store.state.tableData[index][keys[keyIndex]].toString().toLowerCase().includes(searchKey)){
                             searchData.push(this.$store.state.tableData[index]);
                             break;
-                        } else {
-                            console.log('test')
-                        }                      
+                        }                  
                    }                 
                 }
                 console.log(searchData);
-                this.$store.state.tempTableData = this.$store.state.tableData;
+                if (searchData.length === 0){ 
+                    this.$store.state.searchUnsuccessfull = true;
+                    return;
+                }
+                if (this.$store.state.tempTableData.length === 0) this.$store.state.tempTableData = this.$store.state.tableData;
                 this.$store.state.tableData = searchData;
             },
         }

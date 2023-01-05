@@ -30,6 +30,7 @@ const store = createStore({
       popupInteraction: false,
       tableData: [{test: "hoi"}],
       tempTableData: [],
+      searchUnsuccessfull: false,
     }
   },
   mutations: {
