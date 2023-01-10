@@ -41,7 +41,9 @@ const store = createStore({
       else if (state.popupInteraction){
         state.popupInteraction = false;
       }
-  },
+
+      state.searchUnsuccessfull = false;
+    },
   }
 });
 

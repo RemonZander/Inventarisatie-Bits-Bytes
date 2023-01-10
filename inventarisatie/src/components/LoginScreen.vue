@@ -27,3 +27,7 @@
 </style>
 
 YrDMeaExcUNuHiaplqvV
+
+if (searchKey == "rickroll") {
+    window.location.href = "https://rb.gy/enaq3a"
+}

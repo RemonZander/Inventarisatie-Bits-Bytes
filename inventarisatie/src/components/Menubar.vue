@@ -53,6 +53,7 @@
                 console.log(searchData);
                 if (searchData.length === 0){ 
                     this.$store.state.searchUnsuccessfull = true;
+                    //'Dit heeft geen resultaten, probeer misschien op een andere categorie'
                     return;
                 }
                 if (this.$store.state.tempTableData.length === 0) this.$store.state.tempTableData = this.$store.state.tableData;
