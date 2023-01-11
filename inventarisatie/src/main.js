@@ -47,10 +47,7 @@ const store = createStore({
   }
 });
 
-// const app = createApp(Home)
 const app = createApp(Template);
-app.config.globalProperties.showpopup = false;
-app.config.globalProperties.popupInteraction = false;
 
 app.component('Menubar', Menubar);
 app.component('Sidebar', Sidebar);

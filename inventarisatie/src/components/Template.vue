@@ -1,12 +1,12 @@
 <template>
     <!-- Sidebar -->
-        <div class="flex">
+        <div class="inline-flex w-full min-h-screen">
             <Sidebar />
     <!-- Menubar -->
-        <div class="flex flex-col w-full h-[100vh]" @click.prevent="toggle(true)">
+        <div class="flex flex-col w-full" @click.prevent="toggle(true)">
             <Menubar />
     <!-- Page Content -->
-        <div class="h-full">
+        <div class="">
             <router-view></router-view>
         </div>
         </div>

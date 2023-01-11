@@ -21,18 +21,18 @@
                     <tr>
                         <th scope="row">
                             <div class="input-group mb-3">
-                                <input v-model="eigenschap.eigenschap" class="form-control placeholder-black bg-inherit text-black" v-bind:id="'eigenschap' + eigenschap.pos" @keyup.enter="Saveproperty(eigenschap.pos)"  type="text" placeholder="Eigenschap toevoegen..." aria-label="Username" aria-describedby="basic-addon1">
+                                <input v-model="eigenschap.eigenschap" class="form-control placeholder-black bg-inherit text-black" v-bind:id="'eigenschap' + Eigenschappen.length > 0 ? eigenschap.pos : 0" @keyup.enter="Saveproperty(Eigenschappen.length > 0 ? eigenschap.pos : 0)"  type="text" placeholder="Eigenschap toevoegen..." aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                         </th>
                         <td>
-                            <div v-bind:id="'dropdown' + eigenschap.pos" class="dropdown">
+                            <div v-bind:id="'dropdown' + Eigenschappen.length > 0 ? eigenschap.pos : 0" class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{eigenschap.datatype}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" v-on:click="SaveDataType(eigenschap.pos, 'text')">text</a>
-                                    <a class="dropdown-item" v-on:click="SaveDataType(eigenschap.pos, 'getal')">getal</a>
-                                    <a class="dropdown-item" v-on:click="SaveDataType(eigenschap.pos, 'datum')">datum</a>
+                                    <a class="dropdown-item" v-on:click="SaveDataType(Eigenschappen.length > 0 ? eigenschap.pos : 0, 'text')">text</a>
+                                    <a class="dropdown-item" v-on:click="SaveDataType(Eigenschappen.length > 0 ? eigenschap.pos : 0, 'getal')">getal</a>
+                                    <a class="dropdown-item" v-on:click="SaveDataType(Eigenschappen.length > 0 ? eigenschap.pos : 0, 'datum')">datum</a>
                                 </div>
                             </div>
                         </td>
@@ -60,9 +60,8 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
-            
-            <button class="text-[20px] mt-[10vh]" @click.prevent="sendRequest()">Categorie toevoegen</button>
+            </table>        
+            <button class="text-[20px] mt-[3vh] mb-[3vh]" @click.prevent="sendRequest()">Categorie toevoegen</button>
         </div>
     </div>
 </template>
@@ -73,16 +72,23 @@
         data() {
             return {
                 Eigenschappen: [{ pos: 0, eigenschap: "test123", datatype: "text" }],
+                //{ pos: 0, eigenschap: "test123", datatype: "text" }
                 DropDownText: "kies datatype...",
             };
         },
         methods: {
             Saveproperty(pos) {
+                console.log("hoi3");
                 if (pos === -1 && this.DropDownText === "kies datatype...") {
                     return;
                 }
                 else if (pos === -1) {
-                    this.Eigenschappen.push({ pos: this.Eigenschappen[this.Eigenschappen.length - 1].pos + 1, eigenschap: document.getElementById("eigenschap_new").value, datatype: this.DropDownText });
+                    if (this.Eigenschappen.length > 0){
+                        this.Eigenschappen.push({ pos: this.Eigenschappen[this.Eigenschappen.length - 1].pos + 1, eigenschap: document.getElementById("eigenschap_new").value, datatype: this.DropDownText });
+                    }
+                    else {
+                        this.Eigenschappen.push({ pos: 0, eigenschap: document.getElementById("eigenschap_new").value, datatype: this.DropDownText });
+                    }
                     this.DropDownText = "kies datatype...";
                     document.getElementById("eigenschap_new").value = "";
                     console.log(this.Eigenschappen);
@@ -97,6 +103,7 @@
                     return;
                 }
                 else if (pos === -1) {
+                    this.DropDownText = datatype;
                     this.Eigenschappen.push({ pos: this.Eigenschappen[this.Eigenschappen.length - 1].pos + 1, eigenschap: document.getElementById("eigenschap_new").value, datatype: this.DropDownText });
                     this.DropDownText = "kies datatype...";
                     document.getElementById("eigenschap_new").value = "";

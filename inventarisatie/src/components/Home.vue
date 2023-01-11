@@ -45,8 +45,8 @@
                                         </div>
                                     </div>
                                     <!-- popup voor geen resultaten -->
-                                    <div v-show="this.$store.state.searchUnsuccessfull" class="flex flex-col bg-green-100 absolute border-solid border-2 border-black inset-1/2 w-[35vw] h-1/6 transform -translate-x-1/2 -translate-y-1/2">
-                                        <img class="h-12 w-12" src="@/assets/nothing.png">
+                                    <div v-show="this.$store.state.searchUnsuccessfull" class="flex flex-col justify-center items-center bg-green-100 absolute border-solid border-2 border-black inset-1/2 w-[35vw] h-1/6 transform -translate-x-1/2 -translate-y-1/2">
+                                        <img class="h-12 w-12 m-2" src="@/assets/nothing.png">
                                         <p>Geen resultaten gevonden,</p>
                                         <p>controleer de spelling of probeer op een andere categorie</p>
                                     </div>

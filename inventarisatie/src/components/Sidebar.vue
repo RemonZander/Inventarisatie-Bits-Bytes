@@ -1,8 +1,8 @@
 <template>
     <div class="inset-0 flex z-40" @click="this.$store.commit('Closepopup')">
         <!-- Sidebar -->
-        <div class="flex top-0 h-screen z-20"
-             :class="[right ? 'right-0 flex-row' : 'left-0 flex-row-reverse']">
+        <div class="flex top-0 h-[100%] z-20"
+             :class="[right ? 'right-0 flex-row' : 'left-0 flex-row-reverse'] ">
             <!--Drawer -->
             <div class="w-10 h-full p-1 my-auto rounded-br-lg text-white bg-[#424C6E] text-center focus:outline-none hover:bg-[#55638E] transition-color duration-300 flex flex-col gap-7">
                 <button @click.prevent="toggle(false)" class="mt-[3rem] hover:scale-125 duration-300">
